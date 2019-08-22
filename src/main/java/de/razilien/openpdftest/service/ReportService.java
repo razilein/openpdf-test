@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,9 @@ public class ReportService {
     }
 
     private String createDestinationFile() {
-        return new File(exportDirectory, LocalDateTime.now().toString().concat("_report.pdf")).getAbsolutePath();
+        return new File(exportDirectory,
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")).concat("_report.pdf"))
+                        .getAbsolutePath();
     }
 
 }
